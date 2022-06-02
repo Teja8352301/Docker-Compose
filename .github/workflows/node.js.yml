@@ -28,12 +28,30 @@ jobs:
         cache: 'npm'
     - run: npm install
     - run: npm run test
-    
-    - name: Build & push Docker image
-      uses: mr-smithers-excellent/docker-build-push@v4
+#     AGAIN ADDED
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+      
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+      
+    - name: Login to DockerHub
+      uses: docker/login-action@v2
       with:
-        image: teja8352/teja_8352
-        tags: latest
-        registry: docker.io
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Build and push
+      uses: docker/build-push-action@v3
+      with:
+          push: true
+          tags: teja8352/teja_8352:latest
+    
+#     - name: Build & push Docker image
+#       uses: mr-smithers-excellent/docker-build-push@v4
+#       with:
+#         image: teja8352/teja_8352
+#         tags: latest
+#         registry: docker.io
+#         username: ${{ secrets.DOCKER_USERNAME }}
+#         password: ${{ secrets.DOCKER_PASSWORD }}
+
