@@ -30,7 +30,7 @@ jobs:
     - run: npm run test
     
     - name: Build & push Docker image
-      uses: mr-smithers-excellent/docker-build-push@v4
+      uses: mr-smithers-excellent/docker-build-push@v5
       with:
         image: teja8352/teja_8352
         tags: v1,latest
