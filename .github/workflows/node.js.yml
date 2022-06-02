@@ -28,14 +28,13 @@ jobs:
         cache: 'npm'
     - run: npm install
     - run: npm run test
-#     - uses: actions/checkout@v2
-#       name: Check out code
-#     - uses: mr-smithers-excellent/docker-build-push@v5
-#     - name: Build & push Docker image
-#       with:
-#         image: tejayerraguntla/node
-#         tags: latest
-#         registry: registry-url.io
-#         dockerfile: Dockerfile.ci
-#         username: ${{ secrets.DOCKER_USERNAME }}
-#         password: ${{ secrets.DOCKER_PASSWORD }}
+    
+    - uses: mr-smithers-excellent/docker-build-push@v5
+    - name: Build & push Docker image
+      with:
+        image: tejayerraguntla/node
+        tags: latest
+        registry: registry-url.io
+        dockerfile: Dockerfile.ci
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
