@@ -1,0 +1,11 @@
+{
+    "AWSEBDockerrunVersion": "1",
+    "Image": {
+      "Name": "teja8352/teja_8352:latest"
+    },
+    "Ports": [
+      {
+        "ContainerPort": "3000"
+      }
+    ]
+  }

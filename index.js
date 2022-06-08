@@ -53,7 +53,8 @@ app.use("/",(req,res,next)=>{
 
 app.listen(3000,async()=>{
     try{
-        const client = await dbConnect()
+        let isProduction = process.env.production
+        const client = await dbConnect(isProduction)
         await client.db().createCollection('users')
         db = client.db()
         console.log("Connected to Node.js application.....")

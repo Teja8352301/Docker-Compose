@@ -20,7 +20,9 @@ services:
     ports:
       - "2022:8081"
   nodeapplication:
-    build: .
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.dev
     ports:
       - "8080:3000"
     volumes:

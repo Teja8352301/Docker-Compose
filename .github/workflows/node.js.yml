@@ -45,6 +45,34 @@ jobs:
       with:
           push: true
           tags: teja8352/teja_8352:latest
+# DEPLOY TO AWS
+    - name: Get Timestamp
+      uses: gerred/actions/current-time@master
+      id: current-time
+
+    - name: Run String Replace
+      uses: frabert/replace-string-action@master
+      id: format-time
+      with:
+        pattern: '[:\.]+'
+        string: "${{ steps.current-time.outputs.time }}"
+        replace-with: '-'
+        flags: 'g'
+
+    - name: Generate Deployment Package
+      run: zip -r deploy.zip * -x "**node_modules**"
+
+    - name: Deploy to EB
+      uses: einaregilsson/beanstalk-deploy@v16
+      with:
+        aws_access_key: AKIA34ZOUV4UVKM3TN57
+        aws_secret_key: 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
+        application_name: Docker-Node
+        environment_name: Dockernode-env
+        version_label: "docker-app-${{ steps.format-time.outputs.replaced }}"
+        region: ap-south-1
+        deployment_package: deploy.zip
+
     
 #     - name: Build & push Docker image
 #       uses: mr-smithers-excellent/docker-build-push@v4
