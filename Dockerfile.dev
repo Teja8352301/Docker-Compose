@@ -2,10 +2,8 @@ FROM node:18-alpine3.14
 
 WORKDIR /express
 
-COPY ./ ./
+COPY . .
 
 RUN npm install
-
-ENV production=true
 
 CMD [ "npm","run","start" ]
