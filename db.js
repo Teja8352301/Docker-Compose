@@ -1,11 +1,12 @@
-const {MongoClient} = require('mongodb');
+const {MongoClient,ServerApiVersion } = require('mongodb');
 const dbConnect = async(isProduction) =>{
     let uri = 'mongodb://mongodb:mongodb@mongo:27017'
+    // let uri = 'mongodb+srv://Teja:w1J9teVj2hcaIsM9@cluster0.zl9y0.mongodb.net/?retryWrites=true&w=majority'
     if(isProduction == 'true'){
-        uri = 'mongodb://mongodb:Teja8352@docdb-2022-06-07-16-41-02.cvka2dttyoqj.ap-south-1.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=rds-combined-ca-bundle.pem&retryWrites=false'
+        uri = 'mongodb+srv://Teja:w1J9teVj2hcaIsM9cluster0.zl9y0.mongodb.net/?retryWrites=true&w=majority'
     }
-    const client = new MongoClient(uri);
-    client.db('users')
+    const client = new MongoClient(uri,{ useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+    // client.db('users')
     await client.connect();
     await  listDatabases(client);
     return client
