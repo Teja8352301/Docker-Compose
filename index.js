@@ -55,11 +55,11 @@ app.listen(3000,async()=>{
     try{
         let isProduction = process.env.production
         const client = await dbConnect(isProduction)
-        await client.db().createCollection('users')
+        // await client.db().createCollection('users')
         db = client.db()
         console.log("Connected to Node.js application.....")
     }
     catch(e){
-        console.log("failed to connect......")
+        console.log("failed to connect......",e)
     }
 })
